@@ -1,45 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from './components/Button';
+import { useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { TimerProvider } from './context/TimerContext';
+import { TimerDialogScreen } from './screens/TimerDialogScreen';
+import { TimerScreen } from './screens/TimerScreen';
+import { colors } from './styles/colors';
 
 export default function App() {
+  const [timerStarted, setTimerStarted] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-      <Button text={"1"}/>
-      <Button/>
-      <Button/>
-      </View>
-      <View style={styles.row}>
-      <Button/>
-      <Button/>
-      <Button/>
-      </View>
-      <View style={styles.row}>
-      <Button/>
-      <Button/>
-      <Button/>
-      </View>
-      <View style={styles.row}>
-      <Button/>
-      <Button/>
-      <Button/>
-      </View>
-    </View>
+  <TimerProvider>
+  <SafeAreaView style={styles.container}> 
+    <StatusBar />
+    {
+      timerStarted
+      ? <TimerScreen toggleScreen={() => setTimerStarted(prev => !prev)}/>
+      : <TimerDialogScreen toggleScreen={() => setTimerStarted(prev => !prev)}/>
+    }
+  </SafeAreaView>
+  </TimerProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#181c1f',
+    backgroundColor: colors.background,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  row: {
-    flexDirection: 'row',
-    width: "90%",
     justifyContent: 'center'
-    
-  }
+  },
 });
