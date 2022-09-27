@@ -6,8 +6,8 @@ type Props = {
     toggleScreen: VoidFunction;
 }
 
-export function TimerDialogScreen(props: Props){
-    return(
+export function TimerDialogScreen(props: Props) {
+    return (
         <View style={styles.container}>
             <Display />
             <Keyboard toggleScreen={props.toggleScreen} />
@@ -16,7 +16,7 @@ export function TimerDialogScreen(props: Props){
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
     }
-})
+});
